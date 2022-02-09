@@ -6,12 +6,12 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 
-const port = 3000
+const port = 3000;
 
 app.get('/', (_req: Request, res: Response) => {
   res.send('<h1>Hello world</h1>');
 });
 
 server.listen(port, () => {
-  console.log('listening on *:' + port);
+  console.log(`listening on *:${port} ("http://localhost:${port}")`);
 });

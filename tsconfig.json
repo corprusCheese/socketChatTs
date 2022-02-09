@@ -4,5 +4,6 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "outDir": "build",
+        "esModuleInterop": true
     }
 }
