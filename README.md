@@ -1,0 +1,1 @@
+Copy of this project https://github.com/corprusCheese/tic-tac-toe from scala to typescript.
