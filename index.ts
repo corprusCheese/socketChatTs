@@ -1,17 +1,16 @@
-import { Request, Response } from 'express';
+import config from "./src/config";
+import WebSocket from 'ws';
 
-const express = require('express');
-const http = require('http');
+const address = `ws://${config.host}:${config.port}`
 
-const app = express();
-const server = http.createServer(app);
+const wsServer = new WebSocket.Server(config)
 
-const port = 3000;
-
-app.get('/', (_req: Request, res: Response) => {
-  res.send('<h1>Hello world</h1>');
+wsServer.on('connection', function(webSocket) {
+  console.log("New user");
 });
 
-server.listen(port, () => {
-  console.log(`listening on *:${port} ("http://localhost:${port}")`);
+wsServer.on('close', function() {
+  console.log("Close");
 });
+
+
