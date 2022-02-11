@@ -8,17 +8,19 @@ function getFullMessage(data: RawData): string {
 }
 
 function messageOptionsFromSplit(tuple: [string, string], clientArray: Client[]): MessageOptions {
+  console.log('success');
   const possibleClient: string = tuple[1].split(' ')[0];
   const clientInArray: Client | undefined = clientArray.find(
     (x: Client) => x.name === possibleClient,
   );
 
-  return typeof clientArray !== 'undefined'
-    ? { message: tuple[0], clientId: (clientInArray as Client).id, success: true }
+  return typeof clientInArray !== 'undefined'
+    ? { message: tuple[0], clientId: clientInArray.id, success: true }
     : { message: tuple[0], success: true };
 }
 
 function failedMessage(): MessageOptions {
+  console.log('fail');
   return { message: 'FAILED_MESSAGE', success: false };
 }
 
