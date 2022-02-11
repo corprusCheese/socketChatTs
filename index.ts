@@ -1,26 +1,19 @@
-import config from "./src/config";
 import WebSocket from 'ws';
-import Client from "./src/clients";
-import { getName } from "./src/messages/parse";
-import { closeAction, messageAction, saveClientWithId } from "./src/server";
+import config from './src/config';
+import { Client } from './src/clients';
+import { closeAction, nameAndMessage, saveClientWithId } from './src/server';
 
-const wsServer = new WebSocket.Server(config)
+const wsServer = new WebSocket.Server(config);
 
-wsServer.on('connection', function (client: Client) {
+function onConnection(client: Client): void {
+  client.send('Hello, what is your name?');
+  client = saveClientWithId(client);
+  client.on('message', (data: any) => {
+    console.log('received: %s', data);
+    nameAndMessage(data, client);
+  });
 
-    client.send('Hello, what is your name?');
-    client = saveClientWithId(client)
+  client.on('close', closeAction);
+}
 
-    client.on('message', function message(data) {
-        console.log('received: %s', data);
-        if (typeof client.name === "undefined") {
-            client.name = getName(data)
-            client.send('Welcome, ' + client.name + "!");
-        } else messageAction(data, client)
-    });
-
-    client.on('close', closeAction)
-});
-
-
-
+wsServer.on('connection', onConnection);

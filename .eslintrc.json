@@ -7,6 +7,7 @@
     "extends": [
         "airbnb-base"
     ],
+    "plugins": ["@typescript-eslint"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2021
@@ -17,6 +18,25 @@
         "indent": "error",
         "no-multi-spaces": "error",
         "linebreak-style": 0,
-        "no-console": 0
+        "no-console": 0,
+        "no-param-reassign": 0,
+        "object-shorthand": 0,
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
     }
 }
