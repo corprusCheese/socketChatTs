@@ -8,7 +8,6 @@
     "eslint": "npx eslint index.ts src/**"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "ts-node": "^10.5.0",
     "ws": "^8.5.0"
   },
