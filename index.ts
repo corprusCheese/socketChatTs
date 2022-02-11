@@ -1,14 +1,12 @@
-import WebSocket from 'ws';
+import { Server } from 'ws';
 import config from './src/config';
 import { Client } from './src/clients';
 import { closeAction, nameAndMessage, saveClientWithId } from './src/server';
 
-const wsServer = new WebSocket.Server(config);
+const wsServer = new Server(config);
 
 function onConnection(client: Client): void {
-  client.send('Hello, what is your name?');
-  client = saveClientWithId(client);
-  client.on('message', (data: any) => {
+  client.on('message', (data) => {
     console.log('received: %s', data);
     nameAndMessage(data, client);
   });
@@ -16,4 +14,7 @@ function onConnection(client: Client): void {
   client.on('close', closeAction);
 }
 
-wsServer.on('connection', onConnection);
+wsServer.on('connection', (client: Client) => {
+  client.send('Hello, what is your name?');
+  onConnection(saveClientWithId(client));
+});
