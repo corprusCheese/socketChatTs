@@ -8,5 +8,4 @@ After this you should be asked about you name, and then you can chat.
 
 Also it has commands (it should be written after your message):
 
-- /n - you can answer to concrete user
-- /u - get all users
+- /n - you can answer to concrete user (that's all now...)
